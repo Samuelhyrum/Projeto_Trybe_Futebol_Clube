@@ -14,6 +14,7 @@ class App {
 
     const user = new UserCrotroller();
     this.app.post('/login', user.login);
+    this.app.get('/login/validate', user.validateToken);
   }
 
   private config():void {
