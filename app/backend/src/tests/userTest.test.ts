@@ -154,10 +154,12 @@ it('Testando token invalido ', async () => {
 
   chaiHttpResponse = await chai
     .request(app)
-    .get('/login/validate').set('Authorization', tokenMock);
+    .get('/login/validate').set('Authorization', 'tokenMock');
     
   expect(chaiHttpResponse.status).to.equal(401);
 });
+
+
 it('Testando token valido ', async () => {
   sinon
   .stub(UserModel, "findOne")
@@ -174,17 +176,16 @@ it('Testando token valido ', async () => {
     
   expect(chaiHttpResponse.status).to.equal(200);
 
-  expect(chaiHttpResponse.body.role).to.equal(mockTest.dataValues.role);
+  expect(chaiHttpResponse.body).to.equal(mockTest.dataValues.role);
 });
+
 it('Testando sem token ', async () => {
+
   sinon
   .stub(UserModel, "findOne")
   .resolves(
     mockTest as UserModel
   );
-
-  // sinon
-  // .stub(jwt, 'verify').resolves();
 
   chaiHttpResponse = await chai
     .request(app)

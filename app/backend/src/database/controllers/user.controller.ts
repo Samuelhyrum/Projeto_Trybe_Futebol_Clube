@@ -29,15 +29,11 @@ export default class UserCrotroller {
     if (!token) {
       return res.status(401).json({ message: 'Token not found' });
     }
-    try {
-      const decoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, secret);
 
-      if (typeof decoded === 'string') {
-        return res.status(401).json({ message: 'Expired or invalid token' });
-      }
-      return res.status(200).json({ role: decoded.role });
-    } catch (err) {
+    if (typeof decoded === 'string') {
       return res.status(401).json({ message: 'Expired or invalid token' });
     }
+    return res.status(200).json({ role: decoded.role });
   };
 }
