@@ -1,5 +1,6 @@
 import * as express from 'express';
 import UserCrotroller from './database/controllers/user.controller';
+import TeamCrontroller from './database/controllers/teams.controller';
 
 class App {
   public app: express.Express;
@@ -10,11 +11,14 @@ class App {
     this.config();
 
     // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
 
     const user = new UserCrotroller();
+    const team = new TeamCrontroller();
+
+    this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', user.login);
     this.app.get('/login/validate', user.validateToken);
+    this.app.get('/teams', team.getAllTeams);
   }
 
   private config():void {
