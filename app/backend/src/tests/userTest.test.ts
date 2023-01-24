@@ -176,21 +176,21 @@ it('Testando token valido ', async () => {
 
   expect(chaiHttpResponse.body.role).to.equal(mockTest.dataValues.role);
 });
-it('Testando token valido ', async () => {
+it('Testando sem token ', async () => {
   sinon
   .stub(UserModel, "findOne")
   .resolves(
     mockTest as UserModel
   );
 
-  sinon
-  .stub(jwt, 'verify').resolves();
+  // sinon
+  // .stub(jwt, 'verify').resolves();
 
   chaiHttpResponse = await chai
     .request(app)
     .get('/login/validate').set('Authorization', '')
     
-
-  expect(chaiHttpResponse.body).to.equal( { message: 'Token not found' } );
+    expect(chaiHttpResponse.status).to.equal(401);
+  expect(chaiHttpResponse.body.message).to.equal('Token not found');
 });
 });
