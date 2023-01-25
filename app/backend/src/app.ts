@@ -2,6 +2,7 @@ import * as express from 'express';
 import UserCrotroller from './database/controllers/user.controller';
 import TeamCrontroller from './database/controllers/teams.controller';
 import MatchController from './database/controllers/matches.controllers';
+import middleware from './database/middlewares/jwtMiddleware';
 
 class App {
   public app: express.Express;
@@ -19,7 +20,7 @@ class App {
 
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', user.login);
-    this.app.get('/login/validate', user.validateToken);
+    this.app.get('/login/validate', middleware);
     this.app.get('/teams', team.getAllTeams);
     this.app.get('/teams/:id', team.getTeamById);
     this.app.get('/matches', match.getAllTeams);

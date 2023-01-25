@@ -138,18 +138,8 @@ describe('Testando /login', () => {
 
 describe('Testando /login/validate', () => {
   let chaiHttpResponse: Response;
-
-  afterEach(()=> {
-    (UserModel.findOne as sinon.SinonStub).restore();
-    sinon.restore()
-  })
   
 it('Testando token invalido ', async () => {
-  sinon
-  .stub(UserModel, "findOne")
-  .resolves(
-    mockTest as UserModel
-  );
 
   chaiHttpResponse = await chai
     .request(app)
@@ -160,12 +150,6 @@ it('Testando token invalido ', async () => {
 
 
 it('Testando token valido ', async () => {
-  sinon
-  .stub(UserModel, "findOne")
-  .resolves(
-    mockTest as UserModel
-  );
-
   sinon
   .stub(jwt, 'verify').resolves(JWTTESTMOCK);
 
@@ -180,17 +164,11 @@ it('Testando token valido ', async () => {
 
 it('Testando sem token ', async () => {
 
-  sinon
-  .stub(UserModel, "findOne")
-  .resolves(
-    mockTest as UserModel
-  );
-
   chaiHttpResponse = await chai
     .request(app)
     .get('/login/validate').set('Authorization', '')
     
-    expect(chaiHttpResponse.status).to.equal(401);
+  expect(chaiHttpResponse.status).to.equal(401);
   expect(chaiHttpResponse.body.message).to.equal('Token not found');
 });
 });
