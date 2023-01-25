@@ -15,13 +15,13 @@ export default class MatchController {
 
     if (inProgress === 'true') {
       const matchesLives = returnAllMatches
-        .filter((match) => match.dataValues.inProgress === true);
+        .filter((match) => match.inProgress === true);
       return res.status(200).json(matchesLives);
     }
 
     if (inProgress === 'false') {
       const matchesEnd = returnAllMatches
-        .filter((match) => match.dataValues.inProgress === false);
+        .filter((match) => match.inProgress === false);
       return res.status(200).json(matchesEnd);
     }
   };
