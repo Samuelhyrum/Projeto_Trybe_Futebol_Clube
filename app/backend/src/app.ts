@@ -19,6 +19,7 @@ class App {
     this.app.post('/login', user.login);
     this.app.get('/login/validate', user.validateToken);
     this.app.get('/teams', team.getAllTeams);
+    this.app.get('/teams/:id', team.getTeamById);
   }
 
   private config():void {

@@ -9,4 +9,12 @@ export default class TeamCrontroller {
 
     return res.status(200).json(returnAll);
   };
+
+  public getTeamById = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10);
+
+    const teamBYId = await this.teamService.getTeamById(id);
+
+    return res.status(200).json(teamBYId);
+  };
 }
