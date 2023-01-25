@@ -7,7 +7,6 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import UserModel from '../database/models/UserModel'
-import * as UserCrotroller from '../database/controllers/user.controller';
 
 import { Response } from 'superagent';
 
