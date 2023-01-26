@@ -32,4 +32,10 @@ export default class MatchService {
 
     return team;
   };
+
+  public updateLiveMatches = async (id: number, homeTeamGoals: number, awayTeamGoals: number) => {
+    const matchLiveUpdate = await Match.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+
+    return { status: 200, message: 'VAR CHECK CONFIRMS', matchLiveUpdate };
+  };
 }

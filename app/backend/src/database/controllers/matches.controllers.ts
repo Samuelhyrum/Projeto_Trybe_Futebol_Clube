@@ -57,4 +57,17 @@ export default class MatchController {
 
     return res.status(status).json({ message });
   };
+
+  public updateLiveMatch = async (req: Request, res: Response) => {
+    const id = parseInt(req.params.id, 10);
+    const { body } = req;
+
+    const { status, message } = await this.matchService.updateLiveMatches(
+      id,
+      body.homeTeamGoals,
+      body.awayTeamGoals,
+    );
+
+    return res.status(status).json({ message });
+  };
 }
