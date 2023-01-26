@@ -32,6 +32,11 @@ export default class MatchController {
 
     const matchCreated = await this.matchService.createMatch(body);
 
+    if (body.homeTeamId === body.awayTeamId) {
+      return res.status(422).json({ message:
+         'It is not possible to create a match with two equal teams' });
+    }
+
     if (typeof decoded !== 'string') {
       return res.status(201).json(matchCreated);
     }
