@@ -18,7 +18,7 @@ export default class validateBody {
       req.body.decoded = decoded;
       next();
     } catch (error) {
-      return res.status(401).json({ message: 'TOKEN ERROR' });
+      return res.status(401).json({ message: 'Token must be a valid token' });
     }
   };
 }

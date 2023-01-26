@@ -47,6 +47,7 @@ export default class MatchController {
     if (typeof decoded !== 'string') {
       return res.status(201).json(matchCreated);
     }
+    return res.status(401).json({ message: 'Token must be a valid token' });
   };
 
   public updateMatch = async (req: Request, res: Response) => {
