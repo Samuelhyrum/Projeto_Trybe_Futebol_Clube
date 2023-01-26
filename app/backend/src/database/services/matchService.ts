@@ -26,4 +26,10 @@ export default class MatchService {
 
     return { status: 200, message: 'Finished', matchUpdate };
   };
+
+  public getTeamById = async (id: number) => {
+    const team = await Team.findOne({ where: { id } });
+
+    return team;
+  };
 }
