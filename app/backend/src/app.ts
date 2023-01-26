@@ -26,6 +26,7 @@ class App {
     this.app.get('/teams/:id', team.getTeamById);
     this.app.get('/matches', match.getAllTeams);
     this.app.post('/matches', tokenVerify.validateJwt, match.createNewMatch);
+    this.app.patch('/matches/:id/finish', match.updateMatch);
   }
 
   private config():void {

@@ -20,4 +20,10 @@ export default class MatchService {
 
     return newMatch;
   };
+
+  public finishedMatch = async (id: number) => {
+    const matchUpdate = await Match.update({ inProgress: false }, { where: { id } });
+
+    return { status: 200, message: 'Finished', matchUpdate };
+  };
 }
