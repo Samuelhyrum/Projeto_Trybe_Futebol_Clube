@@ -1,4 +1,4 @@
-// import MatchInterface from '../interfaces/matchInterface';
+import MatchInterface from '../interfaces/matchInterface';
 import Match from '../models/MatchModel';
 import Team from '../models/TeamModel';
 
@@ -12,5 +12,12 @@ export default class MatchService {
     });
 
     return matches;
+  };
+
+  public createMatch = async (data:MatchInterface): Promise<Match> => {
+    const newMatch = await Match.create({ ...data,
+      inProgress: true });
+
+    return newMatch;
   };
 }
