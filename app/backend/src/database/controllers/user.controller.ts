@@ -21,4 +21,12 @@ export default class UserCrotroller {
 
     res.status(200).json({ token: message });
   };
+
+  public validateToken = async (req: Request, res: Response) => {
+    const { decoded } = req.body;
+
+    if (typeof decoded !== 'string') {
+      return res.status(200).json({ role: decoded.role });
+    }
+  };
 }

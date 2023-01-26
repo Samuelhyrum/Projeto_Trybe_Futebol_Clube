@@ -27,7 +27,13 @@ export default class MatchController {
   };
 
   public createNewMatch = async (req: Request, res: Response) => {
-    const matchCreated = await this.matchService.createMatch(req.body);
-    return res.status(201).json(matchCreated);
+    const { body } = req;
+    const { decoded } = req.body;
+
+    const matchCreated = await this.matchService.createMatch(body);
+
+    if (typeof decoded !== 'string') {
+      return res.status(201).json(matchCreated);
+    }
   };
 }

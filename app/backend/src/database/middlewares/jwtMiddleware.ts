@@ -3,19 +3,22 @@ import * as jwt from 'jsonwebtoken';
 
 const secret = process.env.JWT_SECRET || 'seusecretdetoken';
 
-export default function validateBody(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  const token = req.header('Authorization');
-  if (!token) {
-    return res.status(401).json({ message: 'Token not found' });
-  }
-  const decoded = jwt.verify(token, secret);
-
-  if (typeof decoded !== 'string') {
-    return res.status(200).json({ role: decoded.role });
-  }
-  next();
+export default class validateBody {
+  public validateJwt = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    const token = req.header('Authorization');
+    if (!token) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
+    try {
+      const decoded = jwt.verify(token, secret);
+      req.body.decoded = decoded;
+      next();
+    } catch (error) {
+      return res.status(401).json({ message: 'TOKEN ERROR' });
+    }
+  };
 }
