@@ -3,6 +3,7 @@ import UserCrotroller from './database/controllers/user.controller';
 import TeamCrontroller from './database/controllers/teams.controller';
 import MatchController from './database/controllers/matches.controllers';
 import Middleware from './database/middlewares/jwtMiddleware';
+import LeaderBoarController from './database/controllers/leaderBoardController';
 
 class App {
   public app: express.Express;
@@ -18,6 +19,7 @@ class App {
     const team = new TeamCrontroller();
     const match = new MatchController();
     const tokenVerify = new Middleware();
+    const leaderboard = new LeaderBoarController();
 
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', user.login);
@@ -28,6 +30,7 @@ class App {
     this.app.post('/matches', tokenVerify.validateJwt, match.createNewMatch);
     this.app.patch('/matches/:id/finish', match.updateMatch);
     this.app.patch('/matches/:id', match.updateLiveMatch);
+    this.app.get('/leaderboard/home', leaderboard.getLeaderBoardOrder);
   }
 
   private config():void {
