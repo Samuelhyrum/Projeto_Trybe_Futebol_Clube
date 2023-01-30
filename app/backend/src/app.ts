@@ -8,13 +8,8 @@ import LeaderBoarController from './database/controllers/leaderBoardController';
 class App {
   public app: express.Express;
 
-  // eslint-disable-next-line max-lines-per-function
   constructor() {
-    this.app = express();
-
-    this.config();
-
-    // Não remover essa rota
+    this.app = express(); this.config();
 
     const user = new UserCrotroller();
     const team = new TeamCrontroller();

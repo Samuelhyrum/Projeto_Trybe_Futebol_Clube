@@ -64,7 +64,6 @@ export default class LeaderBoardService {
     return this.orderBoard(leaderboardOrderAway);
   };
 
-  // eslint-disable-next-line max-lines-per-function
   public AllLeaderBoard = async () => {
     const homeLeaderBoard = await this.leaderboardHome();
     const awayLeaderBoard = await this.leaderboardAway();
@@ -72,8 +71,7 @@ export default class LeaderBoardService {
     const leader = homeLeaderBoard.map((homeTeam, index) => {
       const away = awayLeaderBoard.find((awayTeam) =>
         awayTeam.name === homeTeam.name) as IleaderBoard;
-      return ({
-        name: homeLeaderBoard[index].name,
+      return ({ name: homeLeaderBoard[index].name,
         totalPoints: homeTeam.totalPoints + away.totalPoints,
         totalGames: homeTeam.totalGames + away.totalGames,
         totalVictories: homeTeam.totalVictories + away.totalVictories,
@@ -82,11 +80,10 @@ export default class LeaderBoardService {
         goalsFavor: homeTeam.goalsFavor + away.goalsFavor,
         goalsOwn: homeTeam.goalsOwn + away.goalsOwn,
         goalsBalance: (homeTeam.goalsFavor + away.goalsFavor) - (homeTeam.goalsOwn + away.goalsOwn),
-        // eslint-disable-next-line max-len
-        efficiency: (((homeTeam.totalPoints + away.totalPoints) / ((homeTeam.totalGames + away.totalGames) * 3)) * 100).toFixed(2),
+        efficiency: (((homeTeam.totalPoints
+           + away.totalPoints) / ((homeTeam.totalGames + away.totalGames) * 3)) * 100).toFixed(2),
       });
-    });
-    return this.orderBoard(leader);
+    }); return this.orderBoard(leader);
   };
 
   public orderBoard = (data:IleaderBoard[]): IleaderBoard[] => {
