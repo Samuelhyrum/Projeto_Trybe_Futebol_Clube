@@ -8,6 +8,7 @@ import LeaderBoarController from './database/controllers/leaderBoardController';
 class App {
   public app: express.Express;
 
+  // eslint-disable-next-line max-lines-per-function
   constructor() {
     this.app = express();
 
@@ -32,6 +33,7 @@ class App {
     this.app.patch('/matches/:id', match.updateLiveMatch);
     this.app.get('/leaderboard/home', leaderboard.getLeaderBoardOrderHome);
     this.app.get('/leaderboard/away', leaderboard.getLeaderBoardOrderAway);
+    this.app.get('/leaderboard', leaderboard.getLeaderBoardOrderAll);
   }
 
   private config():void {

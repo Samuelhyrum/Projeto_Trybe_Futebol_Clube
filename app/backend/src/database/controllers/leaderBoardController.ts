@@ -13,4 +13,9 @@ export default class LeaderBoarController {
     const leaderboardAway = await this.leadService.leaderboardAway();
     return res.status(200).json(leaderboardAway);
   };
+
+  public getLeaderBoardOrderAll = async (_req: Request, res: Response) => {
+    const leaderboardAway = await this.leadService.AllLeaderBoard();
+    return res.status(200).json(leaderboardAway);
+  };
 }
