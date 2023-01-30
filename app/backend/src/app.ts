@@ -30,7 +30,8 @@ class App {
     this.app.post('/matches', tokenVerify.validateJwt, match.createNewMatch);
     this.app.patch('/matches/:id/finish', match.updateMatch);
     this.app.patch('/matches/:id', match.updateLiveMatch);
-    this.app.get('/leaderboard/home', leaderboard.getLeaderBoardOrder);
+    this.app.get('/leaderboard/home', leaderboard.getLeaderBoardOrderHome);
+    this.app.get('/leaderboard/away', leaderboard.getLeaderBoardOrderAway);
   }
 
   private config():void {
